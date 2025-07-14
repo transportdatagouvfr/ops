@@ -1,4 +1,5 @@
 # docker compose up
+# https://docs.docker.com/guides/pre-seeding/
 services:
 
   db:
