@@ -1,0 +1,21 @@
+# docker compose up
+services:
+
+  db:
+    image: test:postgres
+    # expose on host port 6432
+    ports:
+      - "6432:5432"
+    shm_size: 128mb
+    environment:
+      POSTGRES_USER: transport_docker
+      POSTGRES_PASSWORD: coucou
+      # TODO: add test db https://github.com/mrts/docker-postgresql-multiple-databases
+      POSTGRES_DB: transport_repo
+    # NOTE: we're using a opaque native Docker volume
+    # instead of a host machine bind mount, for performance reasons
+    volumes:
+    - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
