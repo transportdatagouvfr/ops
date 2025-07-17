@@ -1,4 +1,4 @@
-# docker build -t test:postgres . --platform linux/amd64
+# docker build -t local:transport-db . --platform linux/amd64
 FROM postgis/postgis:14-3.5
 
 RUN apt-get update
