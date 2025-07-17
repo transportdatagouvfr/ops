@@ -1,4 +1,7 @@
-# docker compose up
+# start with:
+#   docker compose up
+# delete volumes with:
+#   docker compose down -v 
 # https://docs.docker.com/guides/pre-seeding/
 services:
 
