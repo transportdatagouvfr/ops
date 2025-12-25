@@ -6,10 +6,10 @@ Scripts and config files for provision and deploy transport and required service
 
 To create a new release as a Docker image:
 1. Update the code (Dockerfile and Github workflow tests), create a pull request, get your changes merged into master
-2. Create a GitHub release (with tag name == release name), with a changelog on the page https://github.com/etalab/transport-ops/releases
+2. Create a GitHub release (with tag name == release name), with a changelog on the page https://github.com/transportdatagouvfr/ops/releases
    1. Use locally `rake get_image_version` to generate the correct tag / release name
    2. Then create a release using this generated name as both the tag and the release title. You can auto-generate the release notes.
-3. On release creation (see https://github.com/etalab/transport-ops/blob/master/.github/workflows/docker.yml), a build will start, and should normally result into the publication of a GitHub-hosted Docker image named just like the release. You can find the resulting image here: https://github.com/etalab/transport-ops/pkgs/container/transport-ops This image URL can then be used by transport-site.
+3. On release creation (see [the workflow](https://github.com/transportdatagouvfr/ops/blob/master/.github/workflows/docker.yml)), a build will start, and should normally result into the publication of a GitHub-hosted Docker image named just like the release. You can find the resulting image [here](https://github.com/transportdatagouvfr/ops/pkgs/container/transport-ops). This image URL can then be used by `transport-site`.
 
  One major caveat: the workflow must exist at the moment the tag is created (https://github.community/t/workflow-set-for-on-release-not-triggering-not-showing-up/16286/7):
 
@@ -17,7 +17,7 @@ To create a new release as a Docker image:
 
 # How to rebuild the package for an existing release (security patches etc)
 
-See https://github.com/etalab/transport-ops/issues/45:
+See https://github.com/transportdatagouvfr/ops/issues/45:
 
 * You can now re-run a workflow thanks to the `workflow_dispatch` event trigger: go to "actions" / "test and publish the docker image", "run workflow" on the right, pick the right tag.
 * It is also possible to move an existing release to "pre-release" (then cancel the job automatically created) then back again to "release", this will re-trigger the release.
@@ -57,7 +57,7 @@ The _Transport Site_ project is tested with CircleCI in a Docker container that 
 
 ### Auto-build of images
 
-:warning: Currently, the auto-build mechanism is broken (see [#17](https://github.com/etalab/transport-ops/issues/17)). See "Manual build" as a work-around in the mean time.
+:warning: Currently, the auto-build mechanism is broken (see [#17](https://github.com/transportdatagouvfr/ops/issues/17)). See "Manual build" as a work-around in the mean time.
 
 When updating that Dockerfile, push a git tag in the format `a.b.c` and the image will be built by Dockerhub : https://hub.docker.com/r/betagouv/transport/
 
@@ -65,9 +65,9 @@ Then update https://github.com/etalab/transport-site/blob/master/.circleci/confi
 
 ### Manual build and push of images
 
-As a work-around for [#17](https://github.com/etalab/transport-ops/issues/17):
+As a work-around for [#17](https://github.com/transportdatagouvfr/ops/issues/17):
 
-* Create a [release](https://github.com/etalab/transport-ops/releases) with an upgraded version number
+* Create a [release](https://github.com/transportdatagouvfr/ops/releases) with an upgraded version number
 * Build the image locally with the correct tag, and **without cache** to make sure no left-over impact the build:
 
 ```
