@@ -21,7 +21,7 @@ FROM ghcr.io/etalab/transport-tools:v2.0.0 AS transport-tools
 # So again, to upgrade this, check out : 
 #
 # https://hub.docker.com/r/hexpm/elixir
-FROM hexpm/elixir:1.20.4-erlang-27.3.4.18-ubuntu-noble-20260911
+FROM hexpm/elixir:1.20.4-erlang-27.3.4.18-ubuntu-noble-20260917
 
 ARG DEBIAN_FRONTEND=noninteractive
 ENV TZ=Europe/Paris
@@ -73,7 +73,7 @@ RUN cat /etc/os-release
 RUN cat /etc/lsb-release
 
 ENV NVM_VERSION=v0.40.7
-ENV NODE_VERSION=24.21.0
+ENV NODE_VERSION=24.22.1
 ENV NVM_DIR=/root/.nvm
 
 RUN mkdir $NVM_DIR
