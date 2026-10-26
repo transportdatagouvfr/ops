@@ -21,7 +21,7 @@ FROM ghcr.io/etalab/transport-tools:v2.0.0 AS transport-tools
 # So again, to upgrade this, check out : 
 #
 # https://hub.docker.com/r/hexpm/elixir
-FROM hexpm/elixir:1.20.4-erlang-27.3.4.18-ubuntu-noble-20260917
+FROM hexpm/elixir:1.20.4-erlang-27.3.4.19-ubuntu-noble-20260930.1
 
 ARG DEBIAN_FRONTEND=noninteractive
 ENV TZ=Europe/Paris
@@ -48,22 +48,6 @@ RUN apt-get update && apt-get install -y build-essential ca-certificates
 # Note that the kernel itself cannot be upgraded here apparently
 # (https://stackoverflow.com/a/66413248)
 #
-# See https://github.com/etalab/transport_deploy/issues/46 for more context
-RUN apt-get upgrade -y
-
-# debugging information
-RUN uname --all
-RUN cat /etc/os-release
-RUN cat /etc/lsb-release
-
-# Helps bump the output of /etc/os-release from says "Ubuntu 24.04.2 LTS" to "... 24.04.3"
-#
-# The source image (hex) is itself based on a ubuntu image whose
-# packages are not necessarily up-to-date all the time. We want to
-# upgrade and ensure we are as up-to-date as possible.
-# Note that the kernel itself cannot be upgraded here apparently
-# (https://stackoverflow.com/a/66413248)
-# 
 # See https://github.com/etalab/transport_deploy/issues/46 for more context
 RUN apt-get upgrade -y
 
