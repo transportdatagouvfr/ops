@@ -57,13 +57,17 @@ RUN cat /etc/os-release
 RUN cat /etc/lsb-release
 
 ENV NVM_VERSION=v0.40.8
+# Commit targeted by the tag above (`git ls-remote https://github.com/nvm-sh/nvm.git refs/tags/v0.40.8^{}`).
+# We check out this exact commit, so that a moved or rewritten tag cannot change the code we run.
+ENV NVM_COMMIT=a885b885fef16fac4bc544188fb25e9e37ae83e8
 ENV NODE_VERSION=24.22.1
 ENV NVM_DIR=/root/.nvm
 
-RUN mkdir $NVM_DIR
-
-# Install NVM
-RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/${NVM_VERSION}/install.sh | bash
+# Install NVM (manual git install, see https://github.com/nvm-sh/nvm#manual-install)
+# The last check fails the build if the tag no longer points to the pinned commit.
+RUN git clone --quiet https://github.com/nvm-sh/nvm.git $NVM_DIR \
+  && git -C $NVM_DIR -c advice.detachedHead=false checkout --quiet $NVM_COMMIT \
+  && test "$(git -C $NVM_DIR rev-parse "${NVM_VERSION}^{commit}")" = "$NVM_COMMIT"
 
 # Install NODE ("." is the sh equivalent to the bash "source" command)
 RUN . $NVM_DIR/nvm.sh && nvm install $NODE_VERSION && nvm use --delete-prefix $NODE_VERSION
