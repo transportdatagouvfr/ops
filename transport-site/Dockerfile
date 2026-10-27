@@ -75,7 +75,7 @@ RUN . $NVM_DIR/nvm.sh && nvm install $NODE_VERSION && nvm use --delete-prefix $N
 # add to path
 ENV PATH=$NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
 
-RUN npm install -g yarn
+RUN npm install -g yarn@1.22.22
 
 # Install app dependencies
 RUN mix local.hex --force
